@@ -1,0 +1,93 @@
+{
+  "name": "remark-attributes",
+  "version": "0.1.0",
+  "description": "remark plugin to support attributes like markdown-it-attrs",
+  "license": "MIT",
+  "keywords": [
+    "unified",
+    "remark",
+    "remark-plugin",
+    "plugin",
+    "mdast",
+    "markdown",
+    "generic",
+    "directive",
+    "attribute",
+    "attrs"
+  ],
+  "repository": "manuelmeister/remark-attributes",
+  "bugs": "https://github.com/manuelmeister/remark-attributes/issues",
+  "author": "Manuel Meister <news.manuelsworld@gmail.com> (https://meister.id)",
+  "contributors": [
+    "Titus Wormer <tituswormer@gmail.com> (https://wooorm.com)"
+  ],
+  "sideEffects": false,
+  "type": "module",
+  "main": "index.ts",
+  "types": "index.d.ts",
+  "files": [
+    "index.d.ts",
+    "index.ts"
+  ],
+  "dependencies": {
+    "@types/mdast": "^3.0.0",
+    "md-attr-parser": "^1.3.0",
+    "mdast-util-directive": "^2.0.0",
+    "mdast-util-from-markdown": "^1.3.0",
+    "micromark-extension-directive": "^2.0.0",
+    "unified": "^10.0.0",
+    "unist-util-visit": "^5.0.0"
+  },
+  "devDependencies": {
+    "@mdx-js/mdx": "^2.3.0",
+    "@types/react": "^18.2.18",
+    "@types/react-dom": "^18.2.7",
+    "@types/tape": "^4.0.0",
+    "c8": "^7.0.0",
+    "is-hidden": "^2.0.0",
+    "prettier": "^2.0.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "rehype-stringify": "^9.0.3",
+    "remark": "^14.0.0",
+    "remark-cli": "^10.0.0",
+    "remark-preset-wooorm": "^9.0.0",
+    "remark-rehype": "^10.1.0",
+    "rimraf": "^3.0.0",
+    "tape": "^5.0.0",
+    "to-vfile": "^7.0.0",
+    "ts-node": "latest",
+    "type-coverage": "^2.0.0",
+    "typescript": "^5.1.6",
+    "xo": "^0.46.0"
+  },
+  "scripts": {
+    "build": "rimraf \"test/**/*.d.ts\" \"*.d.ts\" && tsc && type-coverage",
+    "format": "remark . -qfo --ignore-pattern test/ && prettier . -w --loglevel warn && xo --fix",
+    "test-api": "ts-node-esm test/index.ts",
+    "test-coverage": "c8 --check-coverage --branches 95 --functions 100 --lines 100 --statements 100 --reporter lcov npm run test-api",
+    "test": "npm run build && npm run format && npm run test-coverage"
+  },
+  "prettier": {
+    "tabWidth": 2,
+    "useTabs": false,
+    "singleQuote": true,
+    "bracketSpacing": false,
+    "semi": false,
+    "trailingComma": "none"
+  },
+  "xo": {
+    "prettier": true
+  },
+  "remarkConfig": {
+    "plugins": [
+      "preset-wooorm"
+    ]
+  },
+  "typeCoverage": {
+    "atLeast": 100,
+    "detail": true,
+    "strict": true,
+    "ignoreCatch": true
+  }
+}
