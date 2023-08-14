@@ -66,7 +66,7 @@
   "scripts": {
     "build": "rimraf \"test/**/*.d.ts\" \"*.d.ts\" && tsc && type-coverage",
     "format": "remark . -qfo --ignore-pattern test/ && prettier . -w --log-level warn",
-    "test-api": "ts-node-esm test/index",
+    "test-api": "ts-node-esm test/index.ts",
     "test-coverage": "c8 --check-coverage --branches 95 --functions 100 --lines 100 --statements 100 --reporter lcov npm run test-api",
     "test": "npm run build && npm run format && npm run test-coverage"
   },

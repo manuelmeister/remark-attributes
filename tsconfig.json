@@ -7,12 +7,17 @@
     "moduleResolution": "node",
     "allowJs": true,
     "checkJs": true,
+    "noImplicitAny": false,
     "declaration": true,
     "emitDeclarationOnly": true,
     "allowSyntheticDefaultImports": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
     "allowImportingTsExtensions": true,
-    "strict": true
+    "strict": true,
+    "typeRoots": [
+      "./typings",
+      "node_modules/@types"
+    ]
   },
 }
