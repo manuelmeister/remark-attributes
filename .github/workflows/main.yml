@@ -17,4 +17,4 @@ jobs:
     strategy:
       matrix:
         node:
-          - current
+          - 18.3.0
