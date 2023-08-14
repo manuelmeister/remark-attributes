@@ -1,5 +1,5 @@
 {
-  "include": ["test/**/*.ts", "*.ts"],
+  "include": ["test/**/*.ts", "util/**/*.ts", "*.ts"],
   "compilerOptions": {
     "target": "ESNext",
     "lib": ["ESNext"],

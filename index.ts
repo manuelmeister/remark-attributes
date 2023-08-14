@@ -5,7 +5,6 @@ import type {Node, Parent} from 'unist'
 import type {FromMarkdownExtension} from 'mdast-util-directive/lib'
 import {visit} from 'unist-util-visit'
 import {codes} from 'micromark-util-symbol/codes.js'
-// @ts-expect-error untyped
 import parseAttrs from 'md-attr-parser'
 import type {AttributesExtension} from './util/types.ts'
 
