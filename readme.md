@@ -15,16 +15,12 @@ such).
 ## Contents
 
 *   [What is this?](#what-is-this)
-*   [When should I use this?](#when-should-i-use-this)
 *   [Install](#install)
 *   [Use](#use)
 *   [API](#api)
-    *   [`unified().use(remarkDirective)`](#unifieduseremarkdirective)
+    *   [`unified().use(remarkAttributes)`](#unifieduseremarkattributes)
 *   [Syntax](#syntax)
 *   [Syntax tree](#syntax-tree)
-*   [Types](#types)
-*   [Compatibility](#compatibility)
-*   [Related](#related)
 *   [Contribute](#contribute)
 *   [License](#license)
 
@@ -115,7 +111,8 @@ that.
 
 ## Syntax
 
-This plugin applies the syntax of https://github.com/arobase-che/md-attr-parser used by the markdown-it-attrs plugin.
+This plugin applies the syntax of <https://github.com/arobase-che/md-attr-parser>
+used by the markdown-it-attrs plugin.
 
 ## Syntax tree
 
@@ -176,20 +173,11 @@ abide by its terms.
 [license]: license
 
 [author]: https://wooorm.com
+
 [author2]: https://meister.id
 
 [unified]: https://github.com/unifiedjs/unified
 
 [remark]: https://github.com/remarkjs/remark
-
-[xss]: https://en.wikipedia.org/wiki/Cross-site_scripting
-
-[typescript]: https://www.typescriptlang.org
-
-[rehype]: https://github.com/rehypejs/rehype
-
-[hast]: https://github.com/syntax-tree/hast
-
-[prop]: https://talk.commonmark.org/t/generic-directives-plugins-syntax/444
 
 [create-plugin]: https://unifiedjs.com/learn/guide/create-a-plugin/

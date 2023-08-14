@@ -3,12 +3,11 @@ import type {Root} from 'mdast'
 import type {Code, State} from 'micromark-util-types'
 import type {Node, Parent} from 'unist'
 import type {FromMarkdownExtension} from 'mdast-util-directive/lib'
-import type {AttributesExtension} from './util/types'
-
 import {visit} from 'unist-util-visit'
 import {codes} from 'micromark-util-symbol/codes.js'
-// @ts-ignore
+// @ts-expect-error untyped
 import parseAttrs from 'md-attr-parser'
+import type {AttributesExtension} from './util/types.ts'
 
 export function micromarkAttrs(
   options = {escaped: false}
@@ -23,7 +22,7 @@ export function micromarkAttrs(
           function start(code: Code) {
             return effects.attempt(
               {
-                tokenize: function (effects, startOk, startNok) {
+                tokenize(effects, startOk, startNok) {
                   return attemptStart
 
                   function attemptStart(code: Code) {
@@ -39,7 +38,7 @@ export function micromarkAttrs(
                       effects.enter('chunkString', {contentType: 'string'})
                       return effects.attempt(
                         {
-                          tokenize: (effects, diveOk, diveNok) => {
+                          tokenize(effects, diveOk, diveNok) {
                             return escapedBraces
 
                             function escapedBraces(code: Code) {
@@ -47,6 +46,7 @@ export function micromarkAttrs(
                                 effects.consume(code)
                                 return braces
                               }
+
                               return diveNok(code)
                             }
 
@@ -59,6 +59,7 @@ export function micromarkAttrs(
                                 effects.exit('chunkString')
                                 return diveOk(code)
                               }
+
                               return diveNok(code)
                             }
                           }
@@ -66,13 +67,17 @@ export function micromarkAttrs(
                         startOk,
                         dive
                       )
-                    } else if (code === codes.leftCurlyBrace) {
+                    }
+
+                    if (code === codes.leftCurlyBrace) {
                       effects.enter('attributes')
                       effects.consume(code)
                       effects.enter('attrs')
                       effects.enter('chunkString', {contentType: 'string'})
                       return inside
-                    } else if (code !== null) {
+                    }
+
+                    if (code !== null) {
                       return startNok
                     }
                   }
@@ -92,10 +97,12 @@ export function micromarkAttrs(
                     ) {
                       effects.consume(code)
                       return startNok(code)
-                    } else if (code === codes.backslash) {
+                    }
+
+                    if (code === codes.backslash) {
                       return effects.attempt(
                         {
-                          tokenize: (effects, insideOk, insideNok) => {
+                          tokenize(effects, insideOk, insideNok) {
                             return attemptBackslash
 
                             function attemptBackslash(code: Code) {
@@ -112,24 +119,30 @@ export function micromarkAttrs(
                                 effects.consume(code)
                                 effects.exit('attributes')
                                 return insideOk(code)
-                              } else if (code === codes.backslash) {
-                                effects.consume(code)
-                                return insideNok(code)
-                              } else if (code !== null) {
-                                effects.consume(code)
-                                return insideNok(code)
-                              } else {
-                                throw new Error(
-                                  `No closing attribute brace found`
-                                )
                               }
+
+                              if (code === codes.backslash) {
+                                effects.consume(code)
+                                return insideNok(code)
+                              }
+
+                              if (code !== null) {
+                                effects.consume(code)
+                                return insideNok(code)
+                              }
+
+                              throw new Error(
+                                `No closing attribute brace found`
+                              )
                             }
                           }
                         },
                         startOk,
                         continueFurtherInside
                       )(code)
-                    } else if (code !== null) {
+                    }
+
+                    if (code !== null) {
                       effects.consume(code)
                       return inside
                     }
@@ -182,6 +195,7 @@ export function micromarkAttrs(
                         effects.consume(code)
                         return nok(code)
                       }
+
                       if (code === codes.rightCurlyBrace) {
                         effects.exit('chunkString')
                         effects.exit('attrs')
@@ -189,9 +203,11 @@ export function micromarkAttrs(
                         effects.exit('attributes')
                         return ok(code)
                       }
+
                       effects.consume(code)
                       return inside
                     }
+
                     return nok(code)
                   }
                 }
@@ -215,7 +231,7 @@ export function mdastAttrs(): FromMarkdownExtension {
   return {
     enter: {
       attrs(token) {
-        // @ts-ignore
+        // @ts-expect-error Assume `token` is a `Token`.
         this.enter({type: 'attrs', value: null}, token)
         this.buffer()
       }
@@ -224,16 +240,16 @@ export function mdastAttrs(): FromMarkdownExtension {
       attrs(token) {
         const attrs = this.resume()
         const node = this.exit(token)
-        // @ts-ignore
+        // @ts-expect-error Assume `node` is a `AttrsNode`.
         node.value = attrs
       }
     }
   }
 }
 
-interface AttrsNode extends Node {
+type AttrsNode = {
   value?: string
-}
+} & Node
 
 /**
  * Plugin to support attributes like markdown-it-attrs
@@ -260,9 +276,12 @@ export default function remarkAttributes(
     return (node: any) => {
       visit(
         node,
-        (node) => node.type == 'paragraph',
+        (node) => node.type === 'paragraph',
         (node, index, parent) => {
-          if (node.children?.length == 1 && node.children[0].type == 'attrs') {
+          if (
+            node.children?.length === 1 &&
+            node.children[0].type === 'attrs'
+          ) {
             const index = parent.children.indexOf(node)
             parent.children[index] = node.children[0]
           }
@@ -272,7 +291,7 @@ export default function remarkAttributes(
       visit(
         node,
         (node, index, parent) =>
-          ['paragraph'].includes(node.type) && parent?.type == 'listItem',
+          ['paragraph'].includes(node.type) && parent?.type === 'listItem',
         (node: Parent<AttrsNode>, index, parent) => {
           const children = node.children
 
@@ -280,7 +299,7 @@ export default function remarkAttributes(
             (child: {type: string}) => child.type === 'attrs'
           )
 
-          if (!ids || ids.length == 0) return
+          if (!ids || ids.length === 0) return
 
           const attrNode = ids[0]
           parent.data = {
@@ -301,14 +320,14 @@ export default function remarkAttributes(
           return (
             parent &&
             parent.children?.length > 1 &&
-            !!parent.children.find((node) => node.type === 'attrs') &&
-            node.type == 'attrs'
+            Boolean(parent.children.find((node) => node.type === 'attrs')) &&
+            node.type === 'attrs'
           )
         },
         (node: AttrsNode, index, parent) => {
           if (index !== undefined) {
             const sibling = parent.children[index - 1]
-            if (sibling.type == 'text') {
+            if (sibling.type === 'text') {
               parent.data = {
                 ...parent.data,
                 hProperties: {
@@ -326,6 +345,7 @@ export default function remarkAttributes(
               }
             }
           }
+
           parent.children.splice(index, 1)
         }
       )

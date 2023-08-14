@@ -7,13 +7,6 @@ import type {
   TokenizeContext,
   TokenType
 } from 'micromark-util-types'
-import type {FromMarkdownExtension} from 'mdast-util-directive/lib'
-import type {
-  CompileContext,
-  OnEnterError,
-  OnExitError
-} from 'mdast-util-from-markdown'
-import type {Node} from 'mdast-util-from-markdown/lib'
 
 export type AttributesTokenType = TokenType | 'attributes' | 'attrs'
 
@@ -62,14 +55,14 @@ export type AttributesExit = (type: AttributesTokenType) => Token
  */
 export type AttributesAttempt = (
   construct:
-    | Array<AttributesConstruct>
+    | AttributesConstruct[]
     | AttributesConstruct
     | AttributesConstructRecord,
   ok: State,
   nok?: State | undefined
 ) => State
 
-export interface AttributeEffects extends Effects {
+export type AttributeEffects = {
   /**
    * Start a new token.
    */
@@ -84,7 +77,7 @@ export interface AttributeEffects extends Effects {
    * Try to tokenize a construct.
    */
   attempt: AttributesAttempt
-}
+} & Effects
 
 /**
  * A tokenize function sets up a state machine to handle character codes streaming in.
@@ -107,16 +100,16 @@ export type AttributesTokenizer = (
   nok: State
 ) => State
 
-export interface AttributesExtension extends Omit<Extension, 'text'> {
+export type AttributesExtension = {
   text?: AttributesConstructRecord
-}
+} & Omit<Extension, 'text'>
 
 /**
  * Several constructs, mapped from their initial codes.
  */
 export type AttributesConstructRecord = Record<
   string,
-  Array<AttributesConstruct> | AttributesConstruct | undefined
+  AttributesConstruct[] | AttributesConstruct | undefined
 >
 
 export type AttributesConstruct = {

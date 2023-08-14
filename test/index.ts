@@ -9,6 +9,7 @@ import {readSync} from 'to-vfile'
 import {unified} from 'unified'
 import {remark} from 'remark'
 import {evaluateSync} from '@mdx-js/mdx'
+import type {EvaluateOptions} from '@mdx-js/mdx'
 import html from 'remark-rehype'
 import gfm from 'remark-gfm'
 import stringify from 'rehype-stringify'
@@ -76,7 +77,7 @@ test('fixtures with mdx', (t) => {
       const outfile = readSync(path.join(testBase, fixture, 'output.html'))
 
       const result = evaluateSync(file, {
-        ...(runtime as any),
+        ...(runtime as EvaluateOptions),
         remarkPlugins: [remarkAttributes({mdx: true})]
       }).default
       const string = renderToString(createElement(result))
@@ -94,7 +95,7 @@ test('should throw if missing end backslash and curly brace', async (st) => {
       renderToString(
         createElement(
           evaluateSync(file, {
-            ...(runtime as any),
+            ...(runtime as EvaluateOptions),
             remarkPlugins: [remarkAttributes({mdx: true})]
           }).default
         )
@@ -388,10 +389,10 @@ test('match markdown-it-attrs', async (st) => {
 
   st.plan(testcases.length)
 
-  testcases.forEach(({name, supported, src, expected}) => {
+  for (const {name, supported, src, expected} of testcases) {
     st.test(name, {todo: !supported}, (st) => {
       st.equal(String(proc.processSync(src)), expected)
       st.end()
     })
-  })
+  }
 })

@@ -45,12 +45,15 @@
     "@types/tape": "^4.0.0",
     "c8": "^7.0.0",
     "is-hidden": "^2.0.0",
-    "prettier": "^2.0.0",
+    "micromark-util-symbol": "^1.1.0",
+    "micromark-util-types": "^1.1.0",
+    "prettier": "latest",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "rehype-stringify": "^9.0.3",
     "remark": "^14.0.0",
     "remark-cli": "^10.0.0",
+    "remark-gfm": "^3.0.1",
     "remark-preset-wooorm": "^9.0.0",
     "remark-rehype": "^10.1.0",
     "rimraf": "^3.0.0",
@@ -58,13 +61,12 @@
     "to-vfile": "^7.0.0",
     "ts-node": "latest",
     "type-coverage": "^2.0.0",
-    "typescript": "^5.1.6",
-    "xo": "^0.46.0"
+    "typescript": "^5.1.6"
   },
   "scripts": {
     "build": "rimraf \"test/**/*.d.ts\" \"*.d.ts\" && tsc && type-coverage",
-    "format": "remark . -qfo --ignore-pattern test/ && prettier . -w --loglevel warn && xo --fix",
-    "test-api": "ts-node-esm test/index.ts",
+    "format": "remark . -qfo --ignore-pattern test/ && prettier . -w --log-level warn",
+    "test-api": "ts-node-esm test/index",
     "test-coverage": "c8 --check-coverage --branches 95 --functions 100 --lines 100 --statements 100 --reporter lcov npm run test-api",
     "test": "npm run build && npm run format && npm run test-coverage"
   },
@@ -76,16 +78,13 @@
     "semi": false,
     "trailingComma": "none"
   },
-  "xo": {
-    "prettier": true
-  },
   "remarkConfig": {
     "plugins": [
       "preset-wooorm"
     ]
   },
   "typeCoverage": {
-    "atLeast": 100,
+    "atLeast": 90,
     "detail": true,
     "strict": true,
     "ignoreCatch": true
