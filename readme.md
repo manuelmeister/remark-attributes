@@ -13,7 +13,8 @@
 such).
 
 > [!WARNING]
-> This plugin is a work in progress. It may have bugs, breaking changes and is not fully compatible with markdown-it-attrs.
+> This plugin is a work in progress.
+> It may have bugs, breaking changes and is not fully compatible with markdown-it-attrs.
 
 ## Contents
 
