@@ -3,7 +3,6 @@
 [![Build][build-badge]][build]
 [![Coverage][coverage-badge]][coverage]
 [![Downloads][downloads-badge]][downloads]
-[![Size][size-badge]][size]
 [![Sponsors][sponsors-badge]][collective]
 [![Backers][backers-badge]][collective]
 [![Chat][chat-badge]][chat]
@@ -149,10 +148,6 @@ abide by its terms.
 [downloads-badge]: https://img.shields.io/npm/dm/remark-attributes.svg
 
 [downloads]: https://www.npmjs.com/package/remark-attributes
-
-[size-badge]: https://img.shields.io/bundlephobia/minzip/remark-attributes.svg
-
-[size]: https://bundlephobia.com/result?p=remark-attributes
 
 [sponsors-badge]: https://opencollective.com/unified/sponsors/badge.svg
 
