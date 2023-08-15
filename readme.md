@@ -12,6 +12,9 @@
 (`paragraph{.font-ultrabold}`, `[linktext](/url){target=_blank}`, and
 such).
 
+> [!WARNING]
+> This plugin is a work in progress. It may have bugs, breaking changes and is not fully compatible with markdown-it-attrs.
+
 ## Contents
 
 *   [What is this?](#what-is-this)
