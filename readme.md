@@ -3,9 +3,6 @@
 [![Build][build-badge]][build]
 [![Coverage][coverage-badge]][coverage]
 [![Downloads][downloads-badge]][downloads]
-[![Sponsors][sponsors-badge]][collective]
-[![Backers][backers-badge]][collective]
-[![Chat][chat-badge]][chat]
 
 [**remark**][remark] plugin to support the attributes syntax
 (`paragraph{.font-ultrabold}`, `[linktext](/url){target=_blank}`, and
@@ -186,16 +183,6 @@ abide by its terms.
 [downloads-badge]: https://img.shields.io/npm/dm/remark-attributes.svg
 
 [downloads]: https://www.npmjs.com/package/remark-attributes
-
-[sponsors-badge]: https://opencollective.com/unified/sponsors/badge.svg
-
-[backers-badge]: https://opencollective.com/unified/backers/badge.svg
-
-[collective]: https://opencollective.com/unified
-
-[chat-badge]: https://img.shields.io/badge/chat-discussions-success.svg
-
-[chat]: https://github.com/manuelmeister/remark-attributes/discussions
 
 [npm]: https://docs.npmjs.com/cli/install
 
