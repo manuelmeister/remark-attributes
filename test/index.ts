@@ -17,7 +17,7 @@ import {isHidden} from 'is-hidden'
 import {renderToString} from 'react-dom/server'
 import * as runtime from 'react/jsx-runtime'
 import {createElement} from 'react'
-import remarkAttributes from '../index.ts'
+import remarkAttributes from '../index'
 
 test('directive()', (t) => {
   t.doesNotThrow(() => {

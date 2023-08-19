@@ -1,8 +1,8 @@
 import type {Root} from 'mdast'
 import type {Processor, Transformer} from 'unified'
-import {micromarkAttributes} from './packages/micromark-attributes/index.ts'
-import {mdastAttributes} from './packages/mdast-attributes/index.ts'
-import {attributesTransformer} from './packages/attributes-transformer/index.ts'
+import {micromarkAttributes} from './packages/micromark-attributes/index'
+import {mdastAttributes} from './packages/mdast-attributes/index'
+import {attributesTransformer} from './packages/attributes-transformer/index'
 
 /**
  * Plugin to support attributes like markdown-it-attrs
