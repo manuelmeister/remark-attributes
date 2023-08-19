@@ -49,7 +49,7 @@ test('fixtures with md', (t) => {
       const file = readSync(path.join(testBase, fixture, 'input.md'))
       const outfile = readSync(path.join(testBase, fixture, 'output.html'))
       const proc = remark()
-        .use(remarkAttributes())
+        .use(remarkAttributes)
         .use(html)
         .use(stringify)
         .freeze()
@@ -78,7 +78,7 @@ test('fixtures with mdx', (t) => {
 
       const result = evaluateSync(file, {
         ...(runtime as EvaluateOptions),
-        remarkPlugins: [remarkAttributes({mdx: true})]
+        remarkPlugins: [[remarkAttributes, {mdx: true}]]
       }).default
       const string = renderToString(createElement(result))
       st.equal(String(string), String(outfile), 'process')
@@ -96,7 +96,7 @@ test('should throw if missing end backslash and curly brace', async (st) => {
         createElement(
           evaluateSync(file, {
             ...(runtime as EvaluateOptions),
-            remarkPlugins: [remarkAttributes({mdx: true})]
+            remarkPlugins: [[remarkAttributes, {mdx: true}]]
           }).default
         )
       )
@@ -381,7 +381,7 @@ test('match markdown-it-attrs', async (st) => {
   ]
 
   const proc = remark()
-    .use(remarkAttributes())
+    .use(remarkAttributes)
     .use(html)
     .use(gfm)
     .use(stringify)
