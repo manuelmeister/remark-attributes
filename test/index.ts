@@ -17,7 +17,7 @@ import {isHidden} from 'is-hidden'
 import {renderToString} from 'react-dom/server'
 import * as runtime from 'react/jsx-runtime'
 import {createElement} from 'react'
-import remarkAttributes from '../index'
+import remarkAttributes from '../index.js'
 
 test('directive()', (t) => {
   t.doesNotThrow(() => {
@@ -79,7 +79,7 @@ test('fixtures with mdx', (t) => {
       const outfile = readSync(path.join(testBase, fixture, 'output.html'))
 
       const result = evaluateSync(file, {
-        ...(runtime as EvaluateOptions),
+        ...(runtime as unknown as EvaluateOptions),
         remarkPlugins: [[remarkAttributes, {mdx: true}]]
       }).default
       const string = renderToString(createElement(result))
@@ -97,7 +97,7 @@ test('should throw if missing end backslash and curly brace', async (st) => {
       renderToString(
         createElement(
           evaluateSync(file, {
-            ...(runtime as EvaluateOptions),
+            ...(runtime as unknown as EvaluateOptions),
             remarkPlugins: [[remarkAttributes, {mdx: true}]]
           }).default
         )

@@ -4,3 +4,4 @@ node_modules/
 *.d.ts
 *.log
 !typings/*.d.ts
+dist

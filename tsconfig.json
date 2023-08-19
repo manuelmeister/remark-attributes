@@ -1,19 +1,14 @@
 {
   "include": ["test/**/*.ts", "util/**/*.ts", "*.ts"],
   "compilerOptions": {
-    "target": "ESNext",
+    "outDir": "dist",
+    "target": "esnext",
     "lib": ["ESNext"],
-    "module": "ESNext",
-    "moduleResolution": "node",
-    "allowJs": true,
-    "checkJs": true,
+    "module": "NodeNext",
+    "moduleResolution": "nodenext",
     "noImplicitAny": false,
     "declaration": true,
-    "emitDeclarationOnly": true,
-    "allowSyntheticDefaultImports": true,
     "skipLibCheck": true,
-    "esModuleInterop": true,
-    "strict": true,
     "typeRoots": [
       "./typings",
       "node_modules/@types"

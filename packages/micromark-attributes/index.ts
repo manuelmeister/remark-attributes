@@ -1,4 +1,4 @@
-import {AttributesExtension} from '../../util/types'
+import {AttributesExtension} from '../../util/types.js'
 import {codes} from 'micromark-util-symbol/codes.js'
 import {Code, State} from 'micromark-util-types'
 

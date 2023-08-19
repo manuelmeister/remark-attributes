@@ -64,7 +64,7 @@
   },
   "scripts": {
     "build": "rimraf \"test/**/*.d.ts\" \"*.d.ts\" && tsc && type-coverage",
-    "prepublish": "rimraf \"dist/**/*\" && tsc --outDir dist index.ts",
+    "prepublish": "rimraf \"dist/**/*\" && tsc --project tsconfig.json",
     "format": "prettier . -w --log-level warn",
     "test-api": "ts-node test/index",
     "test-coverage": "c8 --check-coverage --branches 95 --functions 100 --lines 100 --statements 100 --reporter lcov npm run test-api",
