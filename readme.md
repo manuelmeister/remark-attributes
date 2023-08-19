@@ -143,10 +143,6 @@ The default export is `remarkAttributes`.
 
 ### `unified().use(remarkAttributes)`
 
-Configures remark so that it can parse and serialize directives.
-Doesn’t handle the directives: [create your own plugin][create-plugin] to do
-that.
-
 ## Syntax
 
 This plugin applies the syntax of <https://github.com/arobase-che/md-attr-parser>
