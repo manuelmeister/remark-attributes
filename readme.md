@@ -125,7 +125,7 @@ You need to set mdx to true to enable the escaped mode:
 remarkPlugins: [[remarkAttributes, {mdx: true}]]
 ```
 
-Result if
+Result:
 
 ```html
 <p>lorem ipsum <a href="https://ecamp3.ch" target="_blank">link</a> color ludum dorem</p>
@@ -135,6 +135,8 @@ Result if
   <li>a bit compatible to markdown-it-attrs</li>
 </ul>
 ```
+> **Note**
+> Currently the result has a stray comment in front of the expression.
 
 
 ## API
