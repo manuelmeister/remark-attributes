@@ -14,6 +14,8 @@ such).
 > [!WARNING]
 > This plugin is a work in progress.
 > It may have bugs, breaking changes and is not fully compatible with markdown-it-attrs.
+>
+> If you want to help to stabilize this plugin, you are welcome to contribute.
 
 ## Contents
 
@@ -38,6 +40,9 @@ This package is a [unified][] ([remark][]) plugin to add support for attributes.
 **micromark** is the markdown parser we use.
 This is a remark plugin that adds support for the directives syntax and AST to
 remark.
+
+This plugin also 'supports' attributes syntax inside mdx.
+But beware to escape the curly braces with a backslash.
 
 ## Install
 
@@ -100,6 +105,37 @@ Now, running `node example` yields:
   <li>a bit compatible to markdown-it-attrs</li>
 </ul>
 ```
+
+## Use in mdx
+
+```mdx
+const thisIsAMdxExpressionAndNotAnAttribute = true;
+
+lorem ipsum [link](https://ecamp3.ch)\{target=_blank\} color ludum dorem
+
+- very good {thisIsAMdxExpressionAndNotAnAttribute ? 'yes' : 'I tried at least'}
+- easy
+- a bit compatible to markdown-it-attrs
+
+\{.custom-list\}
+```
+
+You need to set mdx to true to enable the escaped mode:
+```js
+remarkPlugins: [[remarkAttributes, {mdx: true}]]
+```
+
+Result if
+
+```html
+<p>lorem ipsum <a href="https://ecamp3.ch" target="_blank">link</a> color ludum dorem</p>
+<ul class="custom-list">
+  <li>very good yes</li>
+  <li>easy</li>
+  <li>a bit compatible to markdown-it-attrs</li>
+</ul>
+```
+
 
 ## API
 

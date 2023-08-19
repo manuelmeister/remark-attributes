@@ -45,7 +45,8 @@ test('fixtures with md', (t) => {
   let index = -1
   while (++index < entries.length) {
     const fixture = entries[index]
-    t.test(fixture, (st) => {
+    const todo = fixture.startsWith('_')
+    t.test(fixture, {todo}, (st) => {
       const file = readSync(path.join(testBase, fixture, 'input.md'))
       const outfile = readSync(path.join(testBase, fixture, 'output.html'))
       const proc = remark()
@@ -72,7 +73,8 @@ test('fixtures with mdx', (t) => {
   let index = -1
   while (++index < entries.length) {
     const fixture = entries[index]
-    t.test(fixture, async (st) => {
+    const todo = fixture.startsWith('_')
+    t.test(fixture,{todo}, async (st) => {
       const file = readSync(path.join(testBase, fixture, 'input.mdx'))
       const outfile = readSync(path.join(testBase, fixture, 'output.html'))
 
@@ -107,6 +109,7 @@ test('should throw if missing end backslash and curly brace', async (st) => {
   )
 })
 
+// TODO: Fix unsupported tests
 test('match markdown-it-attrs', async (st) => {
   const testcases = [
     {
