@@ -1,6 +1,6 @@
 {
   "name": "remark-attributes",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "remark plugin to support attributes like markdown-it-attrs",
   "license": "MIT",
   "keywords": [
@@ -23,7 +23,7 @@
   ],
   "sideEffects": false,
   "type": "module",
-  "main": "index.ts",
+  "main": "dist/index.js",
   "types": "index.d.ts",
   "files": [
     "index.d.ts",
@@ -64,6 +64,7 @@
   },
   "scripts": {
     "build": "rimraf \"test/**/*.d.ts\" \"*.d.ts\" && tsc && type-coverage",
+    "prepublish": "rimraf \"dist/**/*\" && tsc --outDir dist index.ts",
     "format": "prettier . -w --log-level warn",
     "test-api": "ts-node test/index",
     "test-coverage": "c8 --check-coverage --branches 95 --functions 100 --lines 100 --statements 100 --reporter lcov npm run test-api",
