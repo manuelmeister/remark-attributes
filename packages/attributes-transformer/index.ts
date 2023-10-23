@@ -3,6 +3,7 @@ import {Node, Parent} from 'unist'
 import parseAttrs from 'md-attr-parser'
 
 type AttrsNode = {
+  type: 'attrs'
   value?: string
 } & Node
 
@@ -22,11 +23,11 @@ export function attributesTransformer(node: any): void {
     node,
     (node, index, parent) =>
       ['paragraph'].includes(node.type) && parent?.type === 'listItem',
-    (node: Parent<AttrsNode>, index, parent) => {
+    (node: Parent<Node | AttrsNode>, index, parent) => {
       const children = node.children
 
       const ids = children.filter(
-        (child: {type: string}) => child.type === 'attrs'
+        (child: {type: string}): child is AttrsNode => child.type === 'attrs'
       )
 
       if (!ids || ids.length === 0) return

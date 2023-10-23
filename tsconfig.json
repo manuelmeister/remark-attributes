@@ -8,11 +8,10 @@
     "moduleResolution": "nodenext",
     "noImplicitAny": false,
     "declaration": true,
-    "skipLibCheck": true,
-    "typeRoots": [
-      "./typings",
-      "node_modules/@types"
-    ],
+    "paths": {
+      "md-attr-parser": ["./typings/md-attr-parser.d.ts"]
+    },
+    "skipLibCheck": true
   },
   "ts-node": {
     "esm": true,
