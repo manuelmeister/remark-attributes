@@ -24,7 +24,7 @@
   "sideEffects": false,
   "type": "module",
   "main": "dist/index.js",
-  "types": "index.d.ts",
+  "types": "dist/index.d.ts",
   "files": [
     "/dist/util/*",
     "/dist/packages/**/*",
