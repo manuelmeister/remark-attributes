@@ -15,7 +15,8 @@ export function mdastAttributes(): FromMarkdownExtension {
     exit: {
       attrs(token) {
         const attrs = this.resume()
-        const node = this.exit(token)
+        const node = this.stack[this.stack.length - 1]
+        this.exit(token)
         // @ts-expect-error Assume `node` is a `AttrsNode`.
         node.value = attrs
       }
