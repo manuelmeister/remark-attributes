@@ -69,6 +69,7 @@
     "prepublish": "rimraf \"dist/**/*\" && tsc --project tsconfig.json",
     "format": "prettier . -w --log-level warn",
     "test-api": "ts-node test/index",
+    "test-api-inspect": "node --inspect ./dist/test/index.js",
     "test-coverage": "c8 --check-coverage --branches 95 --functions 100 --lines 100 --statements 100 --reporter lcov npm run test-api",
     "test": "npm run build && npm run format && npm run test-coverage"
   },
