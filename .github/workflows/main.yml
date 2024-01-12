@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: dcodeIO/setup-node-nvm@master
+      - uses: actions/setup-node@v3
         with:
           node-version: ${{matrix.node}}
       - run: yarn
@@ -17,4 +17,4 @@ jobs:
     strategy:
       matrix:
         node:
-          - 18.3.0
+          - 18.3
