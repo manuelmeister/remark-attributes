@@ -22,26 +22,29 @@ export function attributesTransformer(root: any): void {
   visit(
     root,
     (node, index, parent) =>
-      ['paragraph'].includes(node.type) && parent?.type === 'listItem',
+      node.type === 'paragraph' && parent?.type === 'listItem',
     (node: Parent<Node | AttrsNode>, index, parent) => {
       const children = node.children
 
-      const ids = children.filter(
-        (child: {type: string}): child is AttrsNode => child.type === 'attrs'
-      )
+      const ids = Object.entries(children)
+        .filter(([_, child]) => child.type === 'attrs')
+        .map(([id, node]) => [parseInt(id), node] as [number, AttrsNode])
 
       if (!ids || ids.length === 0) return
 
-      const attrNode = ids[0]
-      parent.data = {
-        ...parent.data,
-        hProperties: {
-          ...parent.data?.hProperties,
-          ...parseAttrs(attrNode.value).prop
+      for (const [index, attrNode] of ids) {
+        const sibling = node.children[index - 1]
+        if (sibling?.type === 'text') {
+          parent.data = {
+            ...parent.data,
+            hProperties: {
+              ...parent.data?.hProperties,
+              ...parseAttrs(attrNode.value).prop
+            }
+          }
+          children.splice(index, 1)
         }
       }
-      const nodeIndex = children.indexOf(attrNode)
-      children.splice(nodeIndex, 1)
     }
   )
 
@@ -58,7 +61,7 @@ export function attributesTransformer(root: any): void {
     (node: AttrsNode, index, parent) => {
       if (index !== undefined) {
         const sibling = parent.children[index - 1]
-        if (sibling.type === 'text') {
+        if (!sibling || sibling.type === 'text') {
           parent.data = {
             ...parent.data,
             hProperties: {

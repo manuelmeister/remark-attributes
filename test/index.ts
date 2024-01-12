@@ -307,7 +307,7 @@ test('match markdown-it-attrs', async (st) => {
       expected: '<p>paragraph <code>code{.red}</code></p>'
     },
     {
-      supported: false,
+      supported: true,
       name: 'it should not apply inside item lists with trailing `code{.red}`',
       src: '- item with trailing `code = {.red}`',
       expected:
