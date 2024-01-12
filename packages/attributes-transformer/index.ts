@@ -7,9 +7,9 @@ type AttrsNode = {
   value?: string
 } & Node
 
-export function attributesTransformer(node: any): void {
+export function attributesTransformer(root: any): void {
   visit(
-    node,
+    root,
     (node) => node.type === 'paragraph',
     (node, index, parent) => {
       if (node.children?.length === 1 && node.children[0].type === 'attrs') {
@@ -20,7 +20,7 @@ export function attributesTransformer(node: any): void {
   )
 
   visit(
-    node,
+    root,
     (node, index, parent) =>
       ['paragraph'].includes(node.type) && parent?.type === 'listItem',
     (node: Parent<Node | AttrsNode>, index, parent) => {
@@ -46,7 +46,7 @@ export function attributesTransformer(node: any): void {
   )
 
   visit(
-    node,
+    root,
     (node, index, parent) => {
       return (
         parent &&
