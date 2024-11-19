@@ -1,6 +1,6 @@
 {
   "name": "remark-attributes",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "remark plugin to support attributes like markdown-it-attrs",
   "license": "MIT",
   "keywords": [
