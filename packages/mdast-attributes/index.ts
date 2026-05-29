@@ -1,4 +1,4 @@
-import type {FromMarkdownExtension} from 'mdast-util-directive/lib/index.js'
+import type {Extension as FromMarkdownExtension} from 'mdast-util-from-markdown'
 
 /**
  * Fully-configured extension to add Heading ID nodes to Markdown.

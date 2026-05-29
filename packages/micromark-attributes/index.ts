@@ -1,5 +1,5 @@
 import {AttributesExtension} from '../../util/types.js'
-import {codes} from 'micromark-util-symbol/codes.js'
+import {codes} from 'micromark-util-symbol'
 import {Code, State} from 'micromark-util-types'
 
 export function micromarkAttributes(
