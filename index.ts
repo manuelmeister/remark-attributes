@@ -17,10 +17,7 @@ interface AttributesData {
  * Plugin to support attributes like markdown-it-attrs
  * [text](https://test.com){target=_blank}
  */
-function remarkAttributes(
-  this: any,
-  options: RemarkAttributesOptions = {}
-) {
+function remarkAttributes(this: any, options: RemarkAttributesOptions = {}) {
   const settings = {mdx: false, ...options}
   const data = this.data() as AttributesData
 

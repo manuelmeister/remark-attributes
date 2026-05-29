@@ -1,6 +1,7 @@
 {
   "include": ["test/**/*.ts", "util/**/*.ts", "*.ts"],
   "compilerOptions": {
+    "rootDir": ".",
     "outDir": "dist",
     "target": "esnext",
     "lib": ["ESNext"],
