@@ -8,7 +8,7 @@ import type {
   TokenType
 } from 'micromark-util-types'
 
-export type AttributesTokenType = TokenType | 'attributes' | 'attrs'
+export type AttributesTokenType = TokenType | 'attributes' | 'attrs' | 'attributesMarker'
 
 /**
  * Open a token.

@@ -185,14 +185,15 @@ export function micromarkAttributes(
                           codes.leftCurlyBrace
                         ].includes(code as any)
                       ) {
-                        effects.consume(code)
                         return nok(code)
                       }
 
                       if (code === codes.rightCurlyBrace) {
                         effects.exit('chunkString')
                         effects.exit('attrs')
+                        effects.enter('attributesMarker')
                         effects.consume(code)
+                        effects.exit('attributesMarker')
                         effects.exit('attributes')
                         return ok(code)
                       }
