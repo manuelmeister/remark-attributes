@@ -169,8 +169,15 @@ export function micromarkAttributes(
                       effects.consume(code)
                       effects.enter('attrs')
                       effects.enter('chunkString', {contentType: 'string'})
-                      return inside
+                      return firstInside
                     }
+                  }
+
+                  function firstInside(code: Code) {
+                    if (code === codes.rightCurlyBrace) {
+                      return nok(code)
+                    }
+                    return inside(code)
                   }
 
                   function inside(code: Code) {
