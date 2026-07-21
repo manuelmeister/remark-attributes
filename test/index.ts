@@ -4,6 +4,7 @@
 
 import fs from 'node:fs'
 import path from 'node:path'
+import {spawnSync} from 'node:child_process'
 import test from 'tape'
 import {readSync} from 'to-vfile'
 import {unified} from 'unified'
@@ -28,6 +29,34 @@ test('directive()', (t) => {
     unified().use(remarkAttributes).freeze()
   }, 'should not throw if without parser or compiler')
 
+  t.end()
+})
+
+test('attribute blocks satisfy micromark token invariants (dev assertions)', (t) => {
+  // The `{...}` attribute tokenizer must emit a balanced token stream. When it
+  // doesn't, micromark's dev build throws `expected last token to be open`
+  // (issue #10); its production build silently accepts the malformed stream, so
+  // the defect is only observable under the `development` export condition.
+  // Render in a child process with that condition enabled and assert it exits
+  // cleanly. Requires the build output (`npm run build` runs first under `test`).
+  if (!fs.existsSync(path.join('dist', 'index.js'))) {
+    t.skip('needs dist/ — run `npm run build` first')
+    t.end()
+    return
+  }
+
+  const result = spawnSync(
+    process.execPath,
+    ['--conditions=development', path.join('test', 'dev-assertion-check.mjs')],
+    {encoding: 'utf8'}
+  )
+
+  t.equal(
+    result.status,
+    0,
+    'renders `{...}` attribute blocks under micromark dev assertions without throwing' +
+      (result.status === 0 ? '' : '\n' + (result.stderr || result.stdout))
+  )
   t.end()
 })
 
